@@ -9,7 +9,7 @@ package learning.cardgames;
  *
  * @author gustavo.armando
  */
-final public class Carta {
+final public class Carta implements Comparable<Carta> {
     private String color;
     private String valor;
 
@@ -45,6 +45,11 @@ final public class Carta {
      */
     protected void setValor(String valor) {
         this.valor = valor;
+    }
+    
+    @Override
+    public int compareTo(Carta other){
+        return String.CASE_INSENSITIVE_ORDER.compare(this.valor, other.valor);
     }
     
 }

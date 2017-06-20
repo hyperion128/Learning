@@ -17,11 +17,11 @@ public class Baraja {
     public Baraja(){
         deck=new HashSet<>();
         crear_baraja(deck);
+        it=deck.iterator();
         //System.out.println(deck);
     }
     
     public Carta tomar_carta() throws noMoreCardsException{
-        it=deck.iterator();
         return it.next();
     }
     
@@ -31,11 +31,10 @@ public class Baraja {
     }
     
     private void crear_baraja(HashSet<Carta> deck){
-        it=deck.iterator();
         String[] colores= {"Diamantes","Corazones","Espadas","Trebol"};
-        String[] numeros={"1","2","3","4","5","6","7","8","9","10","Jack","Queen","King","As"};
+        String[] valores={"2","3","4","5","6","7","8","9","10","Jack","Queen","King","Âs"};
         for(String colortmp:colores){
-            for(String numerostmp:numeros)deck.add(new Carta(colortmp,numerostmp));
+            for(String valortmp:valores)deck.add(new Carta(colortmp,valortmp));
         }
     }
 
