@@ -20,10 +20,10 @@ import java.util.ListIterator;
  */
 public class Jugador {
     private int apuesta, ganancias;
-    private HashSet<Carta> mano;
+    private HashSet<Carta> mano= new HashSet();
     private Carta carta;
     private Iterator it;
-    private boolean playerturn=false;
+    private boolean playerturn=false, standing=false;
     
     public Jugador(int DineroDeEntrada){
         setGanancias(DineroDeEntrada);
@@ -71,6 +71,11 @@ public class Jugador {
         System.out.println("Sacaste un "+carta.getValor() +" de "+carta.getColor());
         this.mano.add(carta);
     }
+    
+    public void setMano(Carta carta,boolean verbose) {
+        if (verbose)System.out.println("Sacaste un "+carta.getValor() +" de "+carta.getColor());
+        this.mano.add(carta);
+    }
 
     /**
      * @return the playerturn
@@ -85,6 +90,18 @@ public class Jugador {
     public void setPlayerturn(boolean playerturn) {
         this.playerturn = playerturn;
     }
+    
+        
+    public boolean getStanding() {
+        return standing;
+    }
+
+    /**
+     * @param playerturn the playerturn to set
+     */
+    public void setStanding(boolean standing) {
+        this.standing = standing;
+    }
 
     public void verMano(){
         it = mano.iterator();
@@ -92,45 +109,29 @@ public class Jugador {
             carta=(Carta) it.next();
             System.out.print(carta.getValor()+" de "+carta.getColor()+" | ");
         }
+        System.out.print(" Puntos: "+evaluaManoBJ());
     }
     
-    private int contarases(HashSet mano){
-        int ases=0;
-            if(mano.contains(new Carta("As","Diamantes")))ases++;
-            if(mano.contains(new Carta("As","Espadas")))ases++;
-            if(mano.contains(new Carta("As","Corazones")))ases++;
-            if(mano.contains(new Carta("As","Trebol")))ases++;
-     return ases;
-    }
 
-    public int evaluaMano(){
-        int puntos=0,puntos_as=0;
+    public int evaluaManoBJ(){
+        int puntos=0;
         String valor;
-        LinkedList <String> valores =new LinkedList(mano);
+        LinkedList <String> valores = new LinkedList(mano);
         Collections.sort(valores);
-        ListIterator it;
-        it = valores.listIterator();
+        it = valores.iterator();
         while(it.hasNext()){
             carta=(Carta) it.next();
             valor=carta.getValor();
-            
-             if(valor.matches("Jack")||valor.matches("Queen")||valor.matches("King")){
-                 
-                 
-                 puntos+=10;
-                 puntos_as+=10;
-             }
-             else if (valor.matches("As")){
-                 puntos+=1;
-                 puntos_as+=11;
-             }
-             else{
-                 puntos+=Integer.getInteger(valor);
-                 puntos_as+=Integer.getInteger(valor);
-             }     
+             if(valor.matches("Jack")||valor.matches("Queen")||valor.matches("King")) puntos+=10;
+             else if (valor.matches("Âs") && (puntos+11)<21) puntos+=11;
+             else if (valor.matches("Âs") && (puntos+11)>21) puntos+=1;
+             else puntos+=Integer.valueOf(valor);
             //System.out.print(carta.getValor()+" de "+carta.getColor()+" | ");
         }
         return puntos;
     }
     
+    public void clearMano(){
+     this.mano = new HashSet();   
+    }
 }
