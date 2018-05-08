@@ -6,7 +6,7 @@
 package Challenges.easy;
 
 /**
- *
+ * test ok
  * @author gustavo.armando
  */
 public class test {
