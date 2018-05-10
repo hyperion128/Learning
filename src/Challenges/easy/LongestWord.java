@@ -8,7 +8,7 @@ package Challenges.easy;
 import java.util.*; 
 import java.io.*;
 
-class Main {  
+class LongestWord {  
   public static String LongestWord(String sen) { 
   
       // code goes here
@@ -27,9 +27,9 @@ class Main {
   public static void TestLonguestWord(){
       String test1="fun&!! time";
       String test2="I love dogs";
-      if (LongestWord(test1).matches("time"))   System.out.println("Test1 Passed");
+      if (LongestWord(test1).equals("time"))   System.out.println("Test1 Passed");
         else System.out.println("Test1 Failed");
-      if (LongestWord(test2).matches("love"))   System.out.println("Test1 Passed");
+      if (LongestWord(test2).equals("love"))   System.out.println("Test1 Passed");
         else System.out.println("Test2 Failed");
   }
   
