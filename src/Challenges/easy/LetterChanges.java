@@ -19,13 +19,27 @@ public class LetterChanges {
        parameter types being passed are defined, so this return 
        call must match the return type of the function.
        You are free to modify the return type. */
+    String tmpstr="";
+    String vowels="aeiou";
+       for (int i=0; i<str.length();i++){
+           char a=str.charAt(i);
+           if ((int)a>=97 && (int)a<122) a=(char)(a+1);
+           else if ((int)a=='z') a='A';
+           if (vowels.contains(String.valueOf(a))) a=(char)(a-32);
+           tmpstr+=a;
+       }
        
-    
-    return str;
+    return tmpstr;
   } 
       public static void testLetterChanges(){
-          System.out.println(LetterChanges("hello*3"));
-          System.out.println(LetterChanges("fun times!"));
+          String Result1=LetterChanges("hello*3");
+          String Result2=LetterChanges("fun times!");
+          System.out.println("Test1: Input \"hello*3\" returns: \""+Result1+"\"");
+          if (Result1.equals("Ifmmp*3")) System.out.println(" Succes!!");
+          else System.out.println(" Fail :(");
+          System.out.println("Test2: Input \"fun times!\" returns: \""+Result2+"\"");
+          if (Result2.equals("gvO Ujnft!")) System.out.println(" Succes!!");
+          else System.out.println(" Fail :(");    
       }
       
   public static void main (String[] args) {  
