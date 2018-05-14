@@ -18,8 +18,7 @@ public class SimpleSymbols {
        parameter types being passed are defined, so this return 
        call must match the return type of the function.
        You are free to modify the return type. */
-       //if (str.matches("((=|\\+)*\\+[a-z]\\+(=|\\+)*)*") )return "true";
-       if (str.matches("(\\+[a-z]\\+)*") )return "true";
+       if (str.matches("([^\\p{Alpha}]*((\\+\\p{Alpha}\\+)(\\p{Alpha}\\+)*)+[^\\p{Alpha}]*)+") )return "true";
        else return "false";    
   } 
   
@@ -27,7 +26,7 @@ public class SimpleSymbols {
     // keep this function call here     
     //Scanner s = new Scanner(System.in);
     //System.out.print(SimpleSymbols(s.nextLine())); 
-    TestChallenge.testMyClass(SimpleSymbols("+a++b+"), "true");
+    TestChallenge.testMyClass(SimpleSymbols("=+a+b+"), "true");
     TestChallenge.testMyClass(SimpleSymbols("+d+=3=+s+"), "true");
     TestChallenge.testMyClass(SimpleSymbols("f++d+"), "false");
   }   
