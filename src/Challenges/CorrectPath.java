@@ -13,13 +13,14 @@ import java.util.*;
 import java.io.*;
 
 class CorrectPath {  
-    private static boolean[][] table= new boolean [5][5];;
-    private static int x=0,y=0;
     
   public static String CorrectPath(String str)  { 
+       boolean[][] table= new boolean [5][5];
+       int x=0,y=0;
        String path="";
        for (int c=0;c<str.length();c++){
                char t=str.charAt(c);
+                
            switch (t){
                case 'd':
                    y++;
@@ -33,22 +34,29 @@ class CorrectPath {
                case 'r':
                    x++;
                    break;
-               case '?':
-                   for (char blah:new char[]{'u','d','l','r'}){
-                       String dummy=path+blah+str.substring(c);
-                       if(!CorrectPath(dummy).equals("-1"))return dummy;
+           }
+           
+                switch (t){
+                case '?':
+                   for (char blah:new char[]{'d','r','l','u'}){
+                       String dummy=path+blah+str.substring(c+1);
+                       dummy=CorrectPath(dummy);
+                       if(!dummy.equals("-1"))return dummy;
                    }
                 break;
-           }
-           try {
-               table[x][y]=true;
-               path=path+t;
-           }
-           catch (Error e){
-               return "-1";
-           }
+                default:
+                    if(x<5&&y<5&&x>=0&&y>=0){
+                        if (!table[x][y])table[x][y]=true;
+                        else {
+                            return "-1";
+                        }
+                    }
+                    else return "-1";
+                   path=path+t;
+                   break;
+                }
        }
-       if (x==3&&y==3) return path;
+       if (x==4&&y==4) return path;
        else return "-1";
   } 
 
